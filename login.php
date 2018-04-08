@@ -46,9 +46,10 @@ if (isset($_POST['send'])) {
 			}
 	}
 }
-require 'includes/header.php';
+require 'header.php';
 ?>
 	<main>
+	<h1>PLEASE SHOW </h1>
         <h2>Gold's Pizza</h2>
         <p>Welcome to Gold's Pizza! Thanks for choosing us for all your pizza needs. Please login below.</p>
         <form method="post" action="login.php">
@@ -91,4 +92,5 @@ require 'includes/header.php';
 		</fieldset>
         </form>
 	</main>
-<?php include './includes/footer.php'; ?>
+<?php include 'footer.php';
+ ?>

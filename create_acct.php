@@ -1,9 +1,9 @@
 <?php
-	require_once 'includes/secure_conn.php';
+	/*require_once 'secure_conn.php';
 	if (isset($_POST['send'])) {
 	$missing = array();
 	$errors = array();
-
+*/
 	
 	$firstname = trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING)); //returns a string
 	if (empty($firstname)) 
@@ -72,18 +72,18 @@
 			echo $e->getMessage(); 
 			//or for deployment
 			//echo "We are unable to process your request at  this  time. Please try again later.";
-			include 'includes/footer.php'; 
+			include 'footer.php'; 
 			exit;
 	   } 
 	}
-}
-require 'includes/header.php';
+/*}*/
+require 'header.php';
 ?>
 
 
 	<main>
         <h2>Gold's Pizza</h2>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation consectetur adipisicing elit. Velit esse cillum dolore ullamco laboris nisi in reprehenderit in voluptate. Mollit anim id est laborum. Sunt in culpa duis aute irure dolor excepteur sint occaecat.</p>
+        
         <form method="post" action="create_acct.php">
 			<fieldset>
 				<legend>Please Register:</legend>
@@ -165,4 +165,4 @@ require 'includes/header.php';
 		</fieldset>
         </form>
 	</main>
-<?php include './includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
