@@ -1,6 +1,6 @@
 <?php
-require_once 'includes/reg_conn.php';
-require 'includes/header.php';
+#require_once 'includes/reg_conn.php';
+require 'header.php';
 ?>
 <main>
 <?php
