@@ -1,31 +1,40 @@
 <?php
 $currentPage = basename($_SERVER['SCRIPT_FILENAME']); ?>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.0.0/superhero/bootstrap.min.css">
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-
-<nav class = "navbar navbar-expand-sm bg-light navbar-light" id="nav">
-<ul class="navbar-nav">
-	<li class="nav-item active"><a class="nav-link" href="index.php" <?php if ($currentPage == 'index.php') {echo 'id="here"'; } ?>>Home</a></li>
-	<li class="nav-item"><a class="nav-link" href="order_pizza.php" <?php if ($currentPage == 'blog.php') {echo 'id="here"'; } ?>>Order</a></li>
-	<li class="nav-item"><a  class="nav-link"href ="create_acct.php" <?php if ($currentPage == 'create_acct.php') {echo 'id="here"'; } ?>>Create Account</a></li>
+<ul id="nav">
+	<!--<li><a href="index.php" <?php if ($currentPage == 'index.php') {echo 'id="here"'; } ?>>Home</a></li>-->
+	<li><a href="pizza_menu.php" <?php if ($currentPage == 'pizza_menu.php') {echo 'id="here"'; } ?>>Menu</a></li>
+	</a></li>
 	<?php 
-	if (isset($_SESSION['firstName'])) {
-	$message = '<li class="nav-item"><a class = "nav-link" href="logout.php"';
-	$message2 = '>Logout</a></li>';
-	echo $message."if ($currentPage == 'logout.php') {echo 'id='here''; }".$message2;
+	if (isset($_SESSION['adminEmail'])) { // if an admin is logged in add pages
+		$message5 = '<li><a href="admin_discounts.php"';
+		$message6 = '>Discounts</a></li>';
+		echo $message5."if ($currentPage == 'admin_discounts.php') {echo 'id='here''; }".$message6;
+	}
+	if (isset($_SESSION['email'])) { // if a regular user is logged in show account info page
+		$message3 = '<li><a href="account_info.php"';
+		$message4 = '>Account Info</a></li>';
+		$message7 = '<li><a href="order.php"';
+		$message8 = '>Place an Order</a></li>';
+		echo $message7."if ($currentPage == 'order.php') {echo 'id='here''; }".$message8;
+		echo $message3."if ($currentPage == 'account_info.php') {echo 'id='here''; }".$message4;
+	}	
+	if (isset($_SESSION['firstName'])) { // if any user is logged in
+		$message13 = '<li><a href="active_orders.php"';
+		$message14 = '>Active Orders</a></li>';
+		$message = '<li><a href="logout.php"';
+		$message2 = '>Logout</a></li>';
+		echo $message13."if ($currentPage == 'active_orders.php') {echo 'id='here''; }".$message14;
+		echo $message."if ($currentPage == 'logout.php') {echo 'id='here''; }".$message2;
 	} else {
-	$message = '<li class="nav-item"><a class="nav-link" href="login.php"';
-	$message2 = '>Login</a></li>';
-	echo $message."if ($currentPage == 'login.php') {echo 'id='here''; }".$message2;
+		$message = '<li><a href="login.php"';
+		$message2 = '>Customer Login</a></li>';
+		$message9 = '<li><a href="create_acct.php"';
+		$message10 = '>Create Account</a></li>';
+		$message11 = '<li><a href="admin_login.php"';
+		$message12 = '>Admin Login</a></li>';
+		echo $message9."if ($currentPage == 'create_acct.php') {echo 'id='here''; }".$message10;
+		echo $message."if ($currentPage == 'login.php') {echo 'id='here''; }".$message2;
+		echo $message11."if ($currentPage == 'admin_login.php') {echo 'id='here''; }".$message12;
 	}
 	?>
-	</ul>
-</nav>
+</ul>

@@ -1,0 +1,160 @@
+/* Samuel Falcon */
+
+body {
+	margin: 0;
+	padding: 0;
+	color: #333;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	overflow-y:scroll;
+	background-color: #EAE2D7; 
+}
+
+h1, h2 {
+    margin: 0 0 10px 0;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #FFD700;
+    }
+
+h2 {
+    font-size: 140%;
+}
+
+p {
+    margin: 0 auto 1em 0;
+    padding: 0 20px;
+    font-size: 85%;
+    line-height: 1.4;
+}
+
+header {
+    position: absolute;
+    top: -100px;
+}
+
+.floatLeft { width: 50%; float: left; }
+.floatRight {width: 50%; float: right; }
+.container { overflow: hidden; }
+
+#nav {
+    position: absolute;
+    top: 140px;
+    left: 60px;
+    width: 90px;
+}
+
+ul#nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav a {
+    display: block;
+    width: 100px;
+    padding-left: 10px;
+    margin: 3px 0;
+    text-decoration: none;
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+#nav a:link, #nav a:visited {
+    border-left: #00425E solid 10px;
+    color: #00425E;
+}
+
+#nav a:hover, #nav a:active {
+    border-left-color: #fff;
+    background-color: #00425E;
+    color: #fff;
+}
+
+a#here {
+    border-left-color: #fff !important;
+    background-color: transparent !important;
+    color: #0074A5 !important;
+}
+
+main {
+    margin: 0 10% 0 190px;
+    min-width: 525px;
+    max-width: 640px;
+}
+
+main a {
+    font-weight: bold;
+    text-decoration: none;
+    padding: 2px 4px;
+}
+
+main a:link, main a:visited {
+    color: #00425E;
+    border-bottom: #00425E dashed 1px;
+}
+
+main a:hover, main a:active {
+    color: #fff;
+    background-color: #00425E;
+    border-bottom: none;
+}
+
+figure {
+    float: right;
+    margin: 0 20px 0 10px;
+}
+
+footer {
+	clear: both;
+	background-color: #A4C8D8;
+	color: #FFF;
+	padding:12px;
+	width:876px;
+	position:absolute;
+	bottom:0;
+}
+
+footer p {
+	margin-bottom:0;
+	font-size: 90%;
+	font-weight:bold;
+}
+
+form {
+    margin: 0 0 0 20px;
+}
+
+form h2 {
+    color: #036;
+    font-size: 80%;
+    font-weight: bold;
+    margin: 0 0 5px 10px;
+}
+
+form p {
+    margin: 0 0 5px 0;
+}
+
+input[type="text"], input[type="email"] {
+    width: 250px;
+}
+
+input[type="radio"] {
+    display: inline;
+}
+
+textarea {
+    width: 500px;
+    height: 125px;
+}
+
+label {
+    font-weight: bold;
+    color: #036;
+    display: block;
+}
+
+.warning {
+    font-weight: bold;
+    color: #f00;
+}

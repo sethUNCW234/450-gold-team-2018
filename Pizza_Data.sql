@@ -1,17 +1,19 @@
-delete from user;
+delete from pizza_users;
 delete from payment;
 delete from pizza;
 delete from orders;
 delete from topping;
-delete from orderInfo;
+delete from orderDetails;
 delete from pizzaHistory;
 
-insert into user values('JakePeralta@gmail.com', 'NoicePizza', 'Jake', 'Peralta', '791 Lexington Ave');
-insert into user values('Amy_Santiago@gmail.com', 'H0ltIsTheBest', 'Amy', 'Santiago', '791 Lexington Ave');
-insert into user values('DetectiveRD@gmail.com', 'K33pOut', 'Rosa', 'Diaz', '2449 Ocean Ave #3C');
-insert into user values('ScaryTerry@gmail.com', '3Angels', 'Terry', 'Jeffords', '675 Sackett St #206');
-insert into user values('RaymondJHolt@gmail.com', 'Chedd4r', 'Ray', 'Holt', '675 Sackett St #107');
-insert into user values('BoylingFood@gmail.com', '8thBestTbh', 'Charles', 'Boyle', '3979 Nostrand Ave');
+insert into pizza_users values('Jake', 'Peralta', 'JakePeralta@gmail.com', 'NoicePizza', '791 Lexington Ave');
+insert into pizza_users values('Amy', 'Santiago', 'Amy_Santiago@gmail.com', 'H0ltIsTheBest', '791 Lexington Ave');
+insert into pizza_users values('Rosa', 'Diaz', 'DetectiveRD@gmail.com', 'K33pOut', '2449 Ocean Ave #3C');
+insert into pizza_users values('Terry', 'Jeffords', 'ScaryTerry@gmail.com', '3Angels', '675 Sackett St #206');
+insert into pizza_users values('Ray', 'Holt', 'RaymondJHolt@gmail.com', 'Chedd4r', '675 Sackett St #107');
+insert into pizza_users values('Charles', 'Boyle', 'BoylingFood@gmail.com', '8thBestTbh', '3979 Nostrand Ave');
+
+insert into admin_users values('Samuel', 'Falcon', 'samfalc@gmail.com', 'abc');
 
 insert into payment values(4718760344435678, 'JakePeralta@gmail.com', 123, '2021-03-01');
 insert into payment values(4718760342883356, 'Amy_Santiago@gmail.com', 321, '2022-06-01');
@@ -21,39 +23,32 @@ insert into payment values(4718760322222866, 'RaymondJHolt@gmail.com', 159, '202
 insert into payment values(4718760325798642, 'BoylingFood@gmail.com', 131, '2021-08-01');
 
 insert into pizza values('Deluxe', 14.99);
-insert into pizza values('Meal Lovers', 13.99);
-insert into pizza values('Vegetarian', 12.99);
-insert into pizza values('Hawaiian', 12.99);
-insert into pizza values('BBQ Chicken', 13.99);
+insert into pizza values('Meat Lovers', 14.99);
+insert into pizza values('Vegetarian', 14.99);
+insert into pizza values('Hawaiian', 14.99);
+insert into pizza values('BBQ Chicken', 14.99);
 
-insert into orders values(1111, 'JakePeralta@gmail.com');
-insert into orders values(1112, 'Amy_Santiago@gmail.com');
-insert into orders values(1113, 'DetectiveRD@gmail.com');
-insert into orders values(1114, 'ScaryTerry@gmail.com');
-insert into orders values(1115, 'RaymondJHolt@gmail.com');
-insert into orders values(1116, 'BoylingFood@gmail.com');
+insert into topping values('Pepperoni', 02.00,'Meat');
+insert into topping values('Ham', 02.00,'Meat');
+insert into topping values('Bacon', 02.00,'Meat');
+insert into topping values('Chicken', 02.00,'Meat');
+insert into topping values('Pineapple', 01.50,'Vegetarian');
+insert into topping values('Green Pepper', 01.50,'Vegetarian');
+insert into topping values('Jalapeno Pepper', 01.50,'Vegetarian');
+insert into topping values('Asiago Cheese', 01.50,'Vegetarian');
+insert into topping values('Mushroom', 01.50,'Vegetarian');
+insert into topping values('Onion', 01.50,'Vegetarian');
 
-insert into topping values('Pepperoni', 01.50);
-insert into topping values('Ham', 01.50);
-insert into topping values('Bacon', 02.00);
-insert into topping values('Chicken', 01.50);
-insert into topping values('Pineapple', 01.00);
-insert into topping values('Green Pepper', 01.00);
-insert into topping values('Jalapeno Pepper', 02.00);
-insert into topping values('Asiago Cheese', 01.00);
-insert into topping values('Mushroom', 01.50);
-insert into topping values('Onion', 01.50);
+insert into orders values(11111, '2018-04-16', 'JakePeralta@gmail.com');
+insert into orders values(22222, '2018-04-15', 'Amy_Santiago@gmail.com');
+insert into orders values(33333, '2018-04-14', 'DetectiveRD@gmail.com');
 
-insert into orderInfo values(1111, 'Meat Lovers', Null, Null, Null, 2);
-insert into orderInfo values(1112, 'Hawaiian', Null, Null, Null, 1);
-insert into orderInfo values(1113, Null, 'Ham', 'Jalapeno Pepper', 'Asiago Cheese', 1);
-insert into orderInfo values(1114, 'Meat Lovers', Null, Null, Null, 4);
-insert into orderInfo values(1115, Null, 'Mushroom', 'Green Pepper', Null, 1);
-insert into orderInfo values(1116, Null, 'Pepperoni', Null, Null, 2);
-
-insert into pizzaHistory values(Null, 'Pepperoni', 'Bacon', 'Chicken', 'JakePeralta@gmail.com');
-insert into pizzaHistory values('Hawaiian', Null, Null, Null, 'Amy_Santiago@gmail.com');
-insert into pizzaHistory values(Null, 'Ham', 'Jalapeno Pepper', Null, 'DetectiveRD@gmail.com');
-insert into pizzaHistory values('Meat Lovers', Null, Null, Null, 'ScaryTerry@gmail.com');
-insert into pizzaHistory values(Null, 'Green Pepper', 'Mushroom', 'Onion', 'RaymondJHolt@gmail.com');
-insert into pizzaHistory values(Null, 'Pepperoni', Null, Null, 'BoylingFood@gmail.com');
+insert into orderDetails values(11111, 1, 'Pepperoni');
+insert into orderDetails values (22222, 1, 'Pepperoni');
+insert into orderDetails values (22222, 1, 'Ham');
+insert into orderDetails values (22222, 1, 'Mushroom');
+insert into orderDetails values (33333, 1, 'Pepperoni');
+insert into orderDetails values (33333, 1, 'Pineapple');
+insert into orderDetails values (33333, 2, 'Onion');
+insert into orderDetails values (33333, 2, 'Mushroom');
+insert into orderDetails values (33333, 2, 'Green Pepper');

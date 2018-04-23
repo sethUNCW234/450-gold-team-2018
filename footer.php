@@ -10,7 +10,7 @@
 				echo "$startYear".'&ndash;'."$thisYear";
 			}
 		?>
-		David Powers</p>
+		</p>
 	</footer>
 </div>
 </body>

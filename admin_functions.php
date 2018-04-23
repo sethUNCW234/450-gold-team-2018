@@ -3,7 +3,7 @@ require 'header.php';
 ?>
 
 	<main>
-	<?php if (isset($_SESSION["firstName"], $_SESSION["email"])) { 
+	<?php if (isset($_SESSION["firstName"], $_SESSION["adminEmail"])) { 
 			$message = "Welcome back ". $_SESSION["firstName"];
 			$message2 = "You are now logged in";
 			

@@ -64,6 +64,9 @@ require 'header.php';
         $conn = null;
         echo "</table>";
         ?>
+        <p>
+        Login or choose the 'Order' option on the menu to place an order!
+        </p>
 	</main>
 
 <?php 

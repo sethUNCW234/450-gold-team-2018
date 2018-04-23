@@ -1,5 +1,5 @@
 <?php //This is the login page for registered users
-//require 'includes/header.php';  moved down in the code to prevent output before session handling
+
 if (isset($_POST['send'])) {
 	$missing = array();
 	$errors = array();
@@ -17,23 +17,23 @@ if (isset($_POST['send'])) {
 		$missing[]='password';
 	while (!$missing && !$errors){ 
 	   try {
-		require_once ('../pdo_config.php'); // Connect to the db.
+		require_once ('pdo_config.php'); // Connect to the db.
 		// Make the query:
-		$sql = "SELECT firstName, emailAddr, pw FROM Pizza_Registered_Users WHERE emailAddr = :email";
+		$sql = "SELECT firstName, emailAddr, pw FROM pizza_users WHERE emailAddr = :email";
 		$stmt = $conn->prepare($sql);
 		$stmt->bindValue(':email', $email);
 		$stmt->execute();
 		$rows = $stmt->rowCount();
 		if ($rows==0)  //email not found
 			$errors[] = 'email';
-		else { // email found, validate password
+		else { // found the email, now validate password
 			$result = $stmt->fetch();
-			if ($password == password_verify($password, $result['pw'])) { //passwords match
+			if ($password == $result['pw']) { //passwords match
 				$firstName = $result['firstName'];
 				session_start();
 				$_SESSION["firstName"] = $firstName;
 				$_SESSION["email"] = $email;
-				header('Location: logged_in.php');
+				header('Location: logged_in.php'); // redirect to logged_in page
 				exit;
 			}
 			else {
@@ -49,9 +49,8 @@ if (isset($_POST['send'])) {
 require 'header.php';
 ?>
 	<main>
-	<h1>PLEASE SHOW </h1>
         <h2>Gold's Pizza</h2>
-        <p>Welcome to Gold's Pizza! Thanks for choosing us for all your pizza needs. Please login below.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation consectetur adipisicing elit. Velit esse cillum dolore ullamco laboris nisi in reprehenderit in voluptate. Mollit anim id est laborum. Sunt in culpa duis aute irure dolor excepteur sint occaecat.</p>
         <form method="post" action="login.php">
 			<fieldset>
 				<legend>Registered Users Login</legend>
@@ -92,5 +91,4 @@ require 'header.php';
 		</fieldset>
         </form>
 	</main>
-<?php include 'footer.php';
- ?>
+<?php include 'footer.php'; ?>
