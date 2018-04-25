@@ -1,8 +1,19 @@
 <?php
 $currentPage = basename($_SERVER['SCRIPT_FILENAME']); ?>
-<ul id="nav">
+<style type="text/css">
+a {
+	color:WHITE;
+}
+
+li a:hover {
+    background-color: BLACK;
+    color: WHITE;
+}
+</style>
+<nav class="navbar navbar-expand-lg" style="background-color:RED">
+<ul class="nav">
 	<!--<li><a href="index.php" <?php if ($currentPage == 'index.php') {echo 'id="here"'; } ?>>Home</a></li>-->
-	<li><a href="pizza_menu.php" <?php if ($currentPage == 'pizza_menu.php') {echo 'id="here"'; } ?>>Menu</a></li>
+	<li class="nav-item"><a class="nav-link" href="pizza_menu.php" <?php if ($currentPage == 'pizza_menu.php') {echo 'id="here"'; } ?>>Menu</a></li>
 	</a></li>
 	<?php 
 	if (isset($_SESSION['adminEmail'])) { // if an admin is logged in add pages
@@ -26,11 +37,11 @@ $currentPage = basename($_SERVER['SCRIPT_FILENAME']); ?>
 		echo $message13."if ($currentPage == 'active_orders.php') {echo 'id='here''; }".$message14;
 		echo $message."if ($currentPage == 'logout.php') {echo 'id='here''; }".$message2;
 	} else {
-		$message = '<li><a href="login.php"';
+		$message = '<li class="nav-item"><a class="nav-link" href="login.php"';
 		$message2 = '>Customer Login</a></li>';
-		$message9 = '<li><a href="create_acct.php"';
+		$message9 = '<li class="nav-item"><a class="nav-link" href="create_acct.php"';
 		$message10 = '>Create Account</a></li>';
-		$message11 = '<li><a href="admin_login.php"';
+		$message11 = '<li li class="nav-item"><a class="nav-link" href="admin_login.php"';
 		$message12 = '>Admin Login</a></li>';
 		echo $message9."if ($currentPage == 'create_acct.php') {echo 'id='here''; }".$message10;
 		echo $message."if ($currentPage == 'login.php') {echo 'id='here''; }".$message2;
@@ -38,3 +49,4 @@ $currentPage = basename($_SERVER['SCRIPT_FILENAME']); ?>
 	}
 	?>
 </ul>
+</nav>

@@ -1,16 +1,20 @@
 <?php 
 require 'header.php'; 
 ?>
-
+<style ="text/css">
+tr:hover{
+	background-color: #ffff99;
+}
+</style>
     <main>
-        <h2>Gold's Pizza</h2>
+		</br>
         <p>
-        Please select one of our speciality pizzas from below:
+        select one of our specialty pizzas below!
         </p>
 
         <?php
         echo "<div>";
-        echo "<table style='border: solid 1px black;'>";
+        echo "<table class='table'>";
         echo "<tr><th>Specialty Pizza</th><th>Price</th></tr>";
 
         class TableRows extends RecursiveIteratorIterator { 
@@ -19,7 +23,7 @@ require 'header.php';
             }
 
             function current() {
-                return "<td style='width:150px;border:1px solid black;'>" . parent::current(). "</td>";
+                return "<td style='border:solid black;'>" . parent::current(). "</td>";
             }
 
             function beginChildren() { 
@@ -47,10 +51,10 @@ require 'header.php';
         echo "</table>";
         ?>
         <p>
-        Or create your own pizza! $10 as a base price + whatever toppings you'd like from the table below:
+        Or create your own custom pizza! $10 as a base price + whatever toppings you'd like from the table below:
         </p>
         <?php
-        echo "<table style='border: solid 1px black;'>";
+        echo "<table class='table'>";
         echo "<tr><th>Toppings</th><th>Price</th></tr>";
             $stmt2->execute();
             $result2 = $stmt2->setFetchMode(PDO::FETCH_ASSOC);

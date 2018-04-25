@@ -24,6 +24,7 @@ if (isset($_POST['send'])) {
 		$stmt->bindValue(':email', $email);
 		$stmt->execute();
 		$rows = $stmt->rowCount();
+		echo "you got to the row count I guess";
 		if ($rows==0)  //email not found
 			$errors[] = 'email';
 		else { // found the email, now validate password
