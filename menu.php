@@ -22,17 +22,17 @@ li a:hover {
 		echo $message5."if ($currentPage == 'admin_discounts.php') {echo 'id='here''; }".$message6;
 	}
 	if (isset($_SESSION['email'])) { // if a regular user is logged in show account info page
-		$message3 = '<li><a href="account_info.php"';
+		$message3 = '<li class="nav-item"><a class= "nav-link" href="account_info.php"';
 		$message4 = '>Account Info</a></li>';
-		$message7 = '<li><a href="order.php"';
+		$message7 = '<li class="nav-item"><a class= "nav-link" href="order.php"';
 		$message8 = '>Place an Order</a></li>';
-		echo $message7."if ($currentPage == 'order.php') {echo 'id='here''; }".$message8;
+		echo $message7."if ($currentPage == 'order.php') {echo 'id='here'';- }".$message8;
 		echo $message3."if ($currentPage == 'account_info.php') {echo 'id='here''; }".$message4;
 	}	
 	if (isset($_SESSION['firstName'])) { // if any user is logged in
-		$message13 = '<li><a href="active_orders.php"';
+		$message13 = '<li class="nav-item"><a class= "nav-link" href="active_orders.php"';
 		$message14 = '>Active Orders</a></li>';
-		$message = '<li><a href="logout.php"';
+		$message = '<li class="nav-item"><a class= "nav-link" href="logout.php"';
 		$message2 = '>Logout</a></li>';
 		echo $message13."if ($currentPage == 'active_orders.php') {echo 'id='here''; }".$message14;
 		echo $message."if ($currentPage == 'logout.php') {echo 'id='here''; }".$message2;
