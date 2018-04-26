@@ -13,6 +13,7 @@ li a:hover {
 <nav class="navbar navbar-expand-lg" style="background-color:RED">
 <ul class="nav">
 	<!--<li><a href="index.php" <?php if ($currentPage == 'index.php') {echo 'id="here"'; } ?>>Home</a></li>-->
+	<li class = "nav-item"><a class="nav-link" href="newLogin.php" >new Menu Idea</a></li>
 	<li class="nav-item"><a class="nav-link" href="pizza_menu.php" <?php if ($currentPage == 'pizza_menu.php') {echo 'id="here"'; } ?>>Menu</a></li>
 	</a></li>
 	<?php 

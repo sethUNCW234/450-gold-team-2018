@@ -106,8 +106,11 @@ require 'header.php';
 
 
 	<main>
-        <h2>Gold's Pizza</h2>
-        <p>Ut enim ad minim veniam, quis nostrud exercitation consectetur adipisicing elit. Velit esse cillum dolore ullamco laboris nisi in reprehenderit in voluptate. Mollit anim id est laborum. Sunt in culpa duis aute irure dolor excepteur sint occaecat.</p>
+     <style ="text/css">
+.warning{
+	color:red;
+}
+</style>  
         <form method="post" action="create_acct.php">
 			<fieldset>
 				<legend>Please Register:</legend>
@@ -115,11 +118,12 @@ require 'header.php';
 				<p class="warning">Please fix the item(s) indicated.</p>
 				<?php } ?>
             <p>
-                <label for="firstName">First Name: 
+			<div>
+                <label for="firstName" style="float:left">First Name: 
 				<?php if ($missing && in_array('firstName', $missing)) { ?>
                         <span class="warning">Please enter your first name</span>
                     <?php } ?> </label>
-                <input name="firstName" id="firstName" type="text"
+                <input name="firstName" id="firstName" class="form-control" style="width:150px" type="text"
 				 <?php if (isset($firstName)) {
                     echo 'value="' . htmlspecialchars($firstName) . '"';
                 } ?>
@@ -229,7 +233,9 @@ require 'header.php';
             <p>
                 <input name="send" type="submit" value="Register">
             </p>
+			</div>
 		</fieldset>
         </form>
+		
 	</main>
 <?php include 'footer.php'; ?>
