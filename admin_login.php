@@ -54,34 +54,44 @@ require 'header.php';
 			<fieldset>
 				<legend>Admin Login</legend>
 				<?php if ($missing || $errors) { ?>
-				<p class="warning">Please fix the item(s) indicated.</p>
+				<p style="color:RED">Please fix the item(s) indicated.</p>
 				<?php } ?>
             <p>
-                <label for="adminEmail">Please enter your email address:
+            	<div class="form-group">
+                <label for="adminEmail">Please enter your email address:</label>
 				
-				<?php if ($missing && in_array('adminEmail', $missing)) { ?>
-                        <span class="warning">An email address is required</span>
-                    <?php } ?>
-					<?php if ($errors && in_array('adminEmail', $errors)) { ?>
-                        <span class="warning"><br>The email address you provided is not associated with an admin account<br>
-						Please try another email address</span>
-                    <?php } ?>
-				</label>
-                <input name="adminEmail" id="adminEmail" type="text"
+				
+				
+                <input name="adminEmail" <?php if ($missing && in_array('adminEmail',$missing)) 
+                echo 'class="form-control is-invalid"' ?> class="form-control" style="width:450px" id="adminEmail" type="text"
 				<?php if (isset($adminEmail) && !$errors['adminEmail']) {
                     echo 'value="' . htmlspecialchars($adminEmail) . '"';
                 } ?>>
+                <?php if ($missing && in_array('adminEmail', $missing)) { ?>
+                        <span class="error text-danger">This email is not assoicated with any account, please try again</span>
+                    <?php } ?>
+					<?php if ($errors && in_array('adminEmail', $errors)) { ?>
+                        <span class="error text-danger"><br>The email address you provided is not associated with an admin account<br>
+						Please try another email address</span>
+                    <?php } ?>
+                   
+            </div>
             </p>
 			<p>
-				<?php if ($errors && in_array('password', $errors)) { ?>
-                        <span class="warning">The password supplied does not match the password for this email address. Please try again.</span>
-                    <?php } ?>
-                <label for="pw">Password: 
 				
-				<?php if ($missing && in_array('password', $missing)) { ?>
-                        <span class="warning">Please enter a password</span>
-                    <?php } ?> </label>
-                <input name="password" id="pw" type="password">
+                <label for="pw">Password:</label>
+				 
+                <input name="password" style="width:450px" <?php if ( ($missing && in_array('adminEmail',$missing)) || ($errors && in_array('password', $errors))) echo 'class="form-control is-invalid"' ?> class="form-control" id="pw" type="password">
+
+                <?php if ($missing && in_array('password', $missing)) { ?>
+                        <span class="error text-danger">Please enter a password</span>
+                    <?php } ?>
+					<?php if ($errors && in_array('password', $errors)) { ?>
+                        <span class="error text-danger">Incorrect Password</span>
+                    <?php } ?>
+
+
+
             </p>
 			
             <p>

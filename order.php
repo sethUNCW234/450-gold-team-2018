@@ -1,3 +1,16 @@
+
+<style type="text/css">
+img{
+    position:absolute;
+}
+.topping{
+    margin-top: 30px;
+    margin-left:30px;
+
+}
+</style>
+
+
 <?php 
 require 'header.php'; 
 if (isset($_POST['send'])) {
@@ -177,10 +190,10 @@ if (isset($_POST['send'])) {
 ?>
 
     <main>
-        <h2>Gold's Pizza</h2>
         <p>
         Please select one of our speciality pizzas from below:
         </p>
+        <h3 style="display:inline; left-padding:50px">Your Total: </h3><h3 id="total2" style="display:inline;">$0.00</h3>
         <h3>Specialty Pizzas:</h3>
         <form action="order.php" method="post">
         <?php
@@ -196,20 +209,62 @@ if (isset($_POST['send'])) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 
-                echo "<input type='number' min='0' max='100' placeholder='0' name='".$new."' value='".
+                echo "<input type='number' id='".$row['pizzaName']."-".$row['price']."' style='width:150px; display:inline' class='form-control' min='0' max='100' placeholder='0' name='".$new."' value='".
                 htmlentities($row['pizzaName'])."'> ".$row['pizzaName']." ($".$row['price'].")";
-                echo "<br>";
+                echo "</br>";
                 $new++;
             } 
         ?>
 
         <h3>Custom Pizza:</h3>
+       <div class="form-check" style="display:inline;">
+      <input type="checkbox" id="custPcheck">
+      <label class="form-check-label" for="customPizza">
+        create your own custom pizza ($10.00 + Toppings)
+      </label>
+  </div>
+        <div id='custom-pizza-container' style="width:700px">
+            <div id='custom-pizza-pic'  style='width:60%;float:left;margin-right:5px;'>
+                <img id='basePic' src="./pics-450/pizza.png" style="opacity:0.4;">
+                <!-- Meats -->
+                <img id="1" class='topping' src="./pics-450/pep.png" style="display:none">
+                <img  id="2" class='topping' src="./pics-450/bacon.png" style="display:none">
+                <img  id="3" class='topping' src="./pics-450/chicken.png" style="display:none">
+                <img  id="4" class='topping' src="./pics-450/ham.png" style="display:none">
+                <img  id="5" class='topping' src="./pics-450/salami.png" style="display:none">
+                <!-- veggies -->
+                <img  id="6" class='topping' src="./pics-450/pineapple.png" style="display:none">
+                <img  id="7" class='topping' src="./pics-450/greenpepper.png" style="display:none">
+                <img  id="8" class='topping' src="./pics-450/mushroom.png" style="display:none">
+                <img  id="9" class='topping' src="./pics-450/onion.png" style="display:none">
+                <img  id="10" class='topping' src="./pics-450/jalpepper.png" style="display:none">
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+            <div id='custom-toppings'>
 
         <?php 
             $stmt2->execute();
             while($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                echo "<input type='checkbox' name='pizzas' value='".
-                htmlentities($row2['price'])."'> ".$row2['tName']." ($".$row2['price'].")";
+                echo "<div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' disabled='true' id=".$row2['tName']." value='".
+                htmlentities($row2['price'])."'> ".$row2['tName']." ($".$row2['price'].") </label></div>";
                 echo "<br>";
             } 
         }
@@ -217,11 +272,98 @@ if (isset($_POST['send'])) {
             echo $e->getMessage();
         }
         ?>
+    </div>
+        </div>
         <p>
             <br>
+            <h2 style="display:inline;">Current total: </h2><h2 style="display:inline;" id=total>$0.00</h2>
             <input name="send" type="submit" value="Add to Cart">
         </p>
         </form>
+
+        <script type="text/javascript">
+            
+            function calculatePrice(){
+                var total=0.00;
+                $('input[type=number]').each(function() {
+                   //alert($(this.val()));
+                   if($(this).val() >0){
+                    total+=$(this).val() * parseFloat($(this).attr('id').split('-')[1]);
+                   }
+                });
+                var first=true;
+                if($("#custPcheck").is(":checked")){
+                    
+                    total += 10.00;
+                    $('#custom-pizza-container input[type=checkbox]:checked').each(function(){
+                        total+=parseFloat($(this).val());
+                    });
+                }
+                return total.toString();
+            }
+
+            
+
+
+
+            var toppingMap={
+                'Pepperoni':'1',
+                'Bacon':'2',
+                'Chicken':'3',
+                'Ham':'4',
+                'Salami':'5',
+                'Pineapple':'6',
+                'Green':'7',
+                'Mushroom':'8',
+                'Onion':'9',
+                'Jalapeno':'10'
+
+            };
+            $(document).on('change',"#custPcheck",function(){
+                 
+                    $('#custom-pizza-container [type=checkbox]').each(function(){
+                        if($('#custPcheck').is(':checked')){
+
+                         $(this).removeAttr("disabled");
+                         $('#basePic').css('opacity','1.0')
+                        }
+                        else{
+                            $('.topping').css('display','none');
+                            $(this).prop("checked",false);
+                            $(this).attr("disabled",true);
+                            $('#basePic').css('opacity','0.4')
+
+                        }
+
+                    });
+
+                    
+                 });
+
+            $(document).on('change','#custom-pizza-container [type=checkbox]',function(){
+                if(this.checked){
+                    //alert($(this).attr('id'));
+                   // alert(toppingMap[$(this).attr('id')]);
+                   $("#"+toppingMap[$(this).attr('id')]).css('display','block');
+                }
+                if(!this.checked){
+                     $("#"+toppingMap[$(this).attr('id')]).css('display','none');
+
+                }
+
+
+
+            });
+
+            $(document).change(function(){
+                var currentPrice=calculatePrice()
+                $('#total').text("$"+ currentPrice);
+                $("#total2").text("$"+ currentPrice);
+            });
+            
+
+        </script>
+
 	</main>
 
 <?php include 'footer.php'; ?>

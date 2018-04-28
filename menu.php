@@ -18,7 +18,7 @@ li a:hover {
 	</a></li>
 	<?php 
 	if (isset($_SESSION['adminEmail'])) { // if an admin is logged in add pages
-		$message5 = '<li><a href="admin_discounts.php"';
+		$message5 = '<li class="nav-item"><a class="nav-link" href="admin_discounts.php"';
 		$message6 = '>Discounts</a></li>';
 		echo $message5."if ($currentPage == 'admin_discounts.php') {echo 'id='here''; }".$message6;
 	}
