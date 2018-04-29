@@ -298,7 +298,9 @@ if (isset($_POST['send'])) {
                     $('#custom-pizza-container input[type=checkbox]:checked').each(function(){
                         total+=parseFloat($(this).val());
                     });
+
                 }
+                total = total.toFixed(2);
                 return total.toString();
             }
 
