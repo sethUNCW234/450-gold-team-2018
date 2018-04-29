@@ -106,7 +106,7 @@ require 'header.php';
 
 
 
-<form method = "post" action = "newLogin.php">
+<form method = "post" action = "create_acct.php">
 
 <h2>Create your account! Great Pizza Awaits!</h2>
 <div class="form-group">

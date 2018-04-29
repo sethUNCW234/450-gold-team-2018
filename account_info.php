@@ -45,16 +45,23 @@ require 'header.php';
                 foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
                     echo $v;
                 }
-                echo "</table>";
+                 
+                echo "</table></br>";
+               
+                $stmt2->execute();
+                $result2 = $stmt2->setFetchMode(PDO::FETCH_ASSOC);
+                if(mysqli_num_rows($result)>1){
                 echo "<h3>Your Order History</h3>";
                 echo "<table style='border: solid 1px black;'>";
                 echo "<tr><th>Order #</th><th>Date Ordered</th><th>Total Price</th><th>Pizza #</th><th>Toppings on Pizza</th></tr>";
-                $stmt2->execute();
-                $result2 = $stmt2->setFetchMode(PDO::FETCH_ASSOC);
                 foreach(new TableRows(new RecursiveArrayIterator($stmt2->fetchAll())) as $k=>$v) {
                 echo $v;
-                } 
-
+                }
+                echo("</table>");
+            }
+            else{
+                echo("<h2>Our records show you have not placed an order with us </h2>");
+            }
             } 
             catch(PDOException $e) {
                 echo "Error: " . $e->getMessage();

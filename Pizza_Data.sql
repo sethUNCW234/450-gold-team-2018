@@ -1,10 +1,15 @@
-delete from pizza_users;
+use pizza;
+
+set sql_safe_updates=0;
+
 delete from payment;
 delete from pizza;
 delete from orders;
 delete from topping;
 delete from orderDetails;
 delete from pizzaHistory;
+delete from pizza_users;
+delete from admin_users;
 
 insert into pizza_users values('Jake', 'Peralta', 'JakePeralta@gmail.com', 'NoicePizza', '791 Lexington Ave');
 insert into pizza_users values('Amy', 'Santiago', 'Amy_Santiago@gmail.com', 'H0ltIsTheBest', '791 Lexington Ave');
@@ -44,11 +49,14 @@ insert into orders values(22222, '2018-04-15', 'Amy_Santiago@gmail.com');
 insert into orders values(33333, '2018-04-14', 'DetectiveRD@gmail.com');
 
 insert into orderDetails values(11111, 1, 'Pepperoni');
-insert into orderDetails values (22222, 1, 'Pepperoni');
-insert into orderDetails values (22222, 1, 'Ham');
-insert into orderDetails values (22222, 1, 'Mushroom');
-insert into orderDetails values (33333, 1, 'Pepperoni');
-insert into orderDetails values (33333, 1, 'Pineapple');
-insert into orderDetails values (33333, 2, 'Onion');
-insert into orderDetails values (33333, 2, 'Mushroom');
-insert into orderDetails values (33333, 2, 'Green Pepper');
+insert into orderdetails values (22222, 1, 'Pepperoni');
+insert into orderdetails values (22222, 1, 'Ham');
+insert into orderdetails values (22222, 1, 'Mushroom');
+insert into orderdetails values (33333, 1, 'Pepperoni');
+insert into orderdetails values (33333, 1, 'Pineapple');
+insert into orderdetails values (33333, 2, 'Onion');
+insert into orderdetails values (33333, 2, 'Mushroom');
+insert into orderdetails values (33333, 2, 'Green Pepper');
+
+
+set sql_safe_updates = 1;
