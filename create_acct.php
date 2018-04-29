@@ -1,6 +1,6 @@
 <?php
 	/*require_once 'secure_conn.php';  - I was unable to get the secure connection working*/
-	if (isset($_POST['send'])) {
+if (isset($_POST['send'])) {
 	$missing = array();
 	$errors = array();
 
@@ -105,137 +105,158 @@ require 'header.php';
 ?>
 
 
-	<main>
-     <style ="text/css">
-.warning{
-	color:red;
+
+<form method = "post" action = "newLogin.php">
+
+
+<div class="form-group">
+    <label for="firstName">First Name</label>
+    <input type="text" class="form-control" name = "firstName" id="firstName" placeholder="First Name">
+    <span class="error text-danger" id="fnError" style="display:none">Please enter your first name, letters only please!</span>
+  </div>
+
+<div class="form-group">
+    <label for="lastName">Last Name</label>
+    <input type="text" class="form-control" name = "lastName" id="lastName" placeholder="Last Name">
+    <span class="error text-danger" id="lnError" style="display:none">Please enter your last name, letters only please!</span>
+  </div>
+  
+  
+  <div class="form-group">
+    <label for="email">Email address</label>
+    <input type="text" class="form-control" name = "email" id="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <span class="error text-danger" id="emailError" style="display:none">please enter a valid email.</span>
+  </div>
+  
+  <div class="form-group">
+    <label for="address">Address</label>
+    <input type="text" class="form-control" name = "address" id="address" placeholder="Address">
+      <span class="error text-danger" id="adrError" style="display:none">Please enter an address.</span>
+  </div>
+  
+  <div class="form-group">
+    <label for="password1">Password</label>
+    <input type="password" class="form-control" name = "password1" id="password1" placeholder="Password">
+     <span class="error text-danger" id="passError1" style="display:none">Your password must be between 8 and 16 characters</span>
+  </div>
+   
+  
+   <div class="form-group">
+    <label for="password2">Re-Enter Password</label>
+    <input type="password" class="form-control" name = "password2" id="password2" onblur="passwordCheck(this)" placeholder="Password">
+     <span class="error text-danger" id="passError" style="display:none">The passwords did not match</span>
+  </div>
+  
+   <div class="form-group">
+    <label for="cardNum">Credit Card Number</label>
+    <input type="password" class="form-control" name = "cardNum" id="cardNum" placeholder="numbers only please">
+     <span class="error text-danger" id="pass2Error" style="display:none">Please enter only the numbers no dashes</span>
+  </div>
+  
+   <div class="form-group">
+    <label for="CVC">Security Code</label>
+    <input type="password" class="form-control" name = "CVC" id="CVC" placeholder="CVC">
+     <span class="error text-danger" id="csvError" style="display:none">The cvc code is on the back of your card, it should only be 3 digits</span>
+  </div>
+  
+    <div class="form-group">
+    <label for="exprDate">Input date</label>
+    <input type="date" class="form-control" name = "exprDate" id="exprDate" placeholder="EXP">
+    <span class="error text-danger" id="expError" style="display:none">Please enter a date.</span>
+  </div>
+  
+  <div>
+  	<label for="terms">I accept the terms of using this website</label>
+  	<input type="checkbox" name="terms" value="accepted" id="terms">
+  </div>
+
+  <div>
+  	<input name="send" type="submit" value="Register">
+  </div>
+  
+  </form>
+  
+  <script type="text/javascript">
+  function myTextFunc(ele){
+		if (!$(ele).val()){
+		$(ele).next("span").css("display","block");
+  	$(ele).removeClass("form-control");
+  	$(ele).addClass("form-control is-invalid");
+		}
+	else{
+  $(ele).removeClass("form-control is-invalid");
+  $(ele).addClass("form-control");
+	$(ele).next("span").css("display","none");
+		}
+	}
+  
+  function myEmailFunc(ele,pat){
+  
+  
+ if(!$(ele).val() || !pat.test($(ele).val())){
+ 		$(ele).next("span").css("display","block");
+  	$(ele).removeClass("form-control");
+  	$(ele).addClass("form-control is-invalid");
+		}
+    else{
+    $(ele).removeClass("form-control is-invalid");
+  	$(ele).addClass("form-control");
+		$(ele).next("span").css("display","none");
+    }
+ }
+ 
+ function passwordCheck(ele){
+ if($(ele).val() != $("#password1").val()){
+ 		$(ele).next("span").css("display","block");
+  	$(ele).removeClass("form-control");
+  	$(ele).addClass("form-control is-invalid");
+ }
+ else{
+ 		$(ele).removeClass("form-control is-invalid");
+  	$(ele).addClass("form-control");
+		$(ele).next("span").css("display","none");
+ }
 }
-</style>  
-        <form method="post" action="create_acct.php">
-			<fieldset>
-				<legend>Please Register:</legend>
-				<?php if ($missing || $errors) { ?>
-				<p class="warning">Please fix the item(s) indicated.</p>
-				<?php } ?>
-            <p>
-			<div>
-                <label for="firstName" style="float:left">First Name: 
-				<?php if ($missing && in_array('firstName', $missing)) { ?>
-                        <span class="warning">Please enter your first name</span>
-                    <?php } ?> </label>
-                <input name="firstName" id="firstName" class="form-control" style="width:150px" type="text"
-				 <?php if (isset($firstName)) {
-                    echo 'value="' . htmlspecialchars($firstName) . '"';
-                } ?>
-				>
-            </p>
-			<p>
-                <label for="lastName">Last Name: 
-				<?php if ($missing && in_array('lastname', $missing)) { ?>
-                        <span class="warning">Please enter your last name</span>
-                    <?php } ?> </label>
-                <input name="lastName" id="lastName" type="text"
-				 <?php if (isset($lastName)) {
-                    echo 'value="' . htmlspecialchars($lastName) . '"';
-                } ?>
-				>
-            </p>
-            <p>
-                <label for="email">Email: 
-				<?php if ($missing && in_array('email', $missing)) { ?>
-                        <span class="warning">Please enter your email address</span>
-                    <?php } ?>
-				<?php if ($errors && in_array('email', $errors)) { ?>
-                        <span class="warning">The email address you provided is not valid</span>
-                    <?php } ?>
-                <?php if ($errors && in_array('duplicate', $errors)) { ?>
-            			<span class="warning">The email address you provided already exists in the database.<br> Please enter another email address or Login using the menu to the left</span>
-            		<?php } ?>
-				</label>
-                <input name="email" id="email" type="text"
-				<?php if (isset($email) && !$errors['email']) {
-                    echo 'value="' . htmlspecialchars($email) . '"';
-                } ?>>
-            </p>
-			<p>
-				<?php if ($errors && in_array('password', $errors)) { ?>
-                        <span class="warning">The entered passwords do not match. Please try again.</span>
-                    <?php } ?> 
-                <label for="pw1">Password: 
-				
-				<?php if ($missing && in_array('password', $missing)) { ?>
-                        <span class="warning">Please enter a password</span>
-                    <?php } ?> </label>
-                <input name="password1" id="pw1" type="password">
-            </p>
-			<p>
-                <label for="pw2">Confirm Password: 
-				<?php if ($missing && in_array('password', $missing)) { ?>
-                        <span class="warning">Please confirm the password</span>
-                    <?php } ?> </label>
-                <input name="password2" id="pw2" type="password">
-            </p>
-            <p>
-                <label for="address">Address: 
-				<?php if ($missing && in_array('address', $missing)) { ?>
-                        <span class="warning">Please enter your address</span>
-                    <?php } ?> </label>
-                <input name="address" id="address" type="text"
-				 <?php if (isset($address)) {
-                    echo 'value="' . htmlspecialchars($address) . '"';
-                } ?>
-				>
-            </p>
-            <p>
-                <label for="cardNum">Credit Card #: 
-				<?php if ($missing && in_array('cardNum', $missing)) { ?>
-                        <span class="warning">Please enter your credit card number</span>
-                    <?php } ?> </label>
-                <input name="cardNum" id="cardNum" type="text"
-				 <?php if (isset($cardNum)) {
-                    echo 'value="' . htmlspecialchars($cardNum) . '"';
-                } ?>
-				>
-            </p>
-            <p>
-                <label for="CVC">Security Code (CVC): 
-				<?php if ($missing && in_array('CVC', $missing)) { ?>
-                        <span class="warning">Please enter your security code</span>
-                    <?php } ?> </label>
-                <input name="CVC" id="CVC" type="text"
-				 <?php if (isset($CVC)) {
-                    echo 'value="' . htmlspecialchars($CVC) . '"';
-                } ?>
-				>
-            </p>
-            <p>
-                <label for="exprDate">Card Expiration Date (YYYY-MM-DD): 
-				<?php if ($missing && in_array('exprDate', $missing)) { ?>
-                        <span class="warning">Please enter your card expiration date</span>
-                    <?php } ?> </label>
-                <input name="exprDate" id="exprDate" type="text"
-				 <?php if (isset($exprDate)) {
-                    echo 'value="' . htmlspecialchars($exprDate) . '"';
-                } ?>
-				>
-            </p>
-            <p>
-			<?php if ($missing && in_array('accepted', $missing)) { ?>
-                        <span class="warning">You must agree to the terms</span><br>
-                    <?php } ?>
-                <input type="checkbox" name="terms" value="accepted" id="terms"
-				     <?php if ($accepted) {
-                                echo 'checked';
-                            } ?>
-				>
-                <label for="terms">I accept the terms of using this website</label>
-            </p>
-            <p>
-                <input name="send" type="submit" value="Register">
-            </p>
-			</div>
-		</fieldset>
-        </form>
-		
-	</main>
-<?php include 'footer.php'; ?>
+ 
+ $("#email").blur(function(){
+ myEmailFunc(this,/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/);
+ });
+$("#address").blur(function(){
+myEmailFunc(this,/^[a-zA-Z0-9 _.-]*$/);
+});
+$("#firstName").blur(function(){
+myEmailFunc(this,/^[a-zA-Z\s]*$/);
+});
+$("#lastName").blur(function(){
+myEmailFunc(this,/^[a-zA-Z\s]*$/);
+});
+
+$("#password1").blur(function(){
+myEmailFunc(this,/.{8,16}/);
+});
+$("#cardNum").blur(function(){
+myEmailFunc(this,/^[0-9]*$/);
+});
+$("#inputCSV").blur(function(){
+myEmailFunc(this,/^\d{3}/);
+});
+$("#exprDate").blur(function(){
+myTextFunc(this);
+});
+
+  
+  </script>
+  
+  
+  <style type="text/css">
+input[type="text"] {
+    width: 300px;
+}
+input[type="date"] {
+    width: 300px;
+}
+input[type="password"]{
+	width:300px;
+}
+
+</style>
