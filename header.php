@@ -5,6 +5,30 @@
 <!DOCTYPE HTML> 
 <html lang="en">
 <head>
+<style type="text/css">
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    box-sizing: border-box;
+    min-height: 100%;
+    padding: 0 0 100px;
+    position: relative;
+}
+
+footer {
+    bottom: 0;
+    height: 100px;
+    left: 0;
+    position: absolute;
+    width: 100%;
+}
+
+</style>
 	<meta charset="utf-8">
 	<title>Gold's Pizza<?php if (isset($title)) {echo "&mdash;$title";} ?></title>
 	

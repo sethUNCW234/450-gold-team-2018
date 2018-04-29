@@ -108,7 +108,7 @@ require 'header.php';
 
 <form method = "post" action = "newLogin.php">
 
-
+<h2>Create your account! Great Pizza Awaits!</h2>
 <div class="form-group">
     <label for="firstName">First Name</label>
     <input type="text" class="form-control" name = "firstName" id="firstName" placeholder="First Name">
@@ -260,3 +260,6 @@ input[type="password"]{
 }
 
 </style>
+<?php 
+include 'footer.php';
+?>

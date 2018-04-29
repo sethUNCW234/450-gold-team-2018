@@ -8,8 +8,7 @@ require 'header.php';
 
         <?php
         echo "<div>";
-        echo "<table style='border: solid 1px black;'>";
-        echo "<tr><th>Order ID</th><th>Date Received</th><th>Price</th></tr>";
+      
 
         class TableRows extends RecursiveIteratorIterator { 
             function __construct($it) { 
@@ -36,16 +35,35 @@ require 'header.php';
             $stmt->execute();
 
             // set the resulting array to associative
+            //echo(mysql_num_rows($result));
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+
+            if(mysqli_num_rows($result)>1){
+         echo "<table style='border: solid 1px black;'>";
+        echo "<tr><th>Order ID</th><th>Date Received</th><th>Price</th></tr>";
+                
             foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
                 echo $v;
             }
+            echo("</table>");
+        }
+            else{
+                echo("<h3>No current orders at this time</h3>");
+        
+            
+
+            
+        }
+
         }
         catch (PDOException $e) { 
             echo $e->getMessage();
         }
-        echo "</table>";
+    
+        echo "</div>";
+        
         ?>
+
 	</main>
 
 <?php 

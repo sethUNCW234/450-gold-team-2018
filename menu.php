@@ -41,7 +41,7 @@ li a:hover {
 		$message2 = '>Customer Login</a></li>';
 		$message9 = '<li class="nav-item"><a class="nav-link" href="create_acct.php"';
 		$message10 = '>Create Account</a></li>';
-		$message11 = '<li li class="nav-item"><a class="nav-link" href="admin_login.php"';
+		$message11 = '<li class="nav-item"><a class="nav-link" href="admin_login.php"';
 		$message12 = '>Admin Login</a></li>';
 		echo $message9."if ($currentPage == 'create_acct.php') {echo 'id='here''; }".$message10;
 		echo $message."if ($currentPage == 'login.php') {echo 'id='here''; }".$message2;
@@ -49,4 +49,13 @@ li a:hover {
 	}
 	?>
 </ul>
+<?php 
+ if(isset($_SESSION['email'])){
+ 	echo("<ul class='navbar-nav ml-auto'><li class='nav-item'><a class='nav-link' href='#'>Hi, ".$_SESSION['firstName']."!</a></li></ul>");
+ }
+ if(isset($_SESSION['adminEmail'])){
+ 	echo("<ul class='navbar-nav ml-auto'><li class='nav-item'><a class='nav-link' href='#'>Hi Admin, ".$_SESSION['firstName']."!</a></li></ul>");
+ }
+
+ ?>
 </nav>

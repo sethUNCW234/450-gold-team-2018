@@ -1,3 +1,11 @@
+	<style type="text/css">
+	/*footer{
+		position:fixed;
+ 		bottom:0;
+ 		left:0;
+	}
+</style>
+
 	<footer>
 		<p>&copy;
 		<?php

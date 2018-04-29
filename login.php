@@ -33,7 +33,7 @@ if (isset($_POST['send'])) {
 				session_start();
 				$_SESSION["firstName"] = $firstName;
 				$_SESSION["email"] = $email;
-				header('Location: logged_in.php'); // redirect to logged_in page
+				header('Location: pizza_menu.php'); // redirect to logged_in page
 				exit;
 			}
 			else {

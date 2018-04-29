@@ -4,7 +4,10 @@
 require 'header.php';
 ?>
 <main>
-	<p>Logged out</p>
+<div style="align:center">
+<h1>You are now being logged out</h1>
+<img src="./pics-450/loading.gif" style="width:200px;height:200px;padding-left:100px; ">
+</div>
 <?php
  if (isset($_SESSION["firstName"])) {
 			$_SESSION=array();
@@ -12,7 +15,8 @@ require 'header.php';
 			setcookie('PHPSESSID','',time()-3600,'/');
 		}
 		
-		header('Location: pizza_menu.php');
+
+		header('refresh:5; pizza_menu.php');
 		exit();
 	
 		?>
