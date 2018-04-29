@@ -49,7 +49,7 @@ $('#pizzaDescription').text(descriptionMap[text]);
 $('.PizzaInfo').css({
 	display:'block',
 	position: 'absolute',
-    top: bottomTop+35,
+    top: bottomTop,
     left: bottomLeft+125,	
 });
 }
