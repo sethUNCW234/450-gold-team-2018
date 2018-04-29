@@ -55,3 +55,7 @@ CREATE TABLE pizzaHistory (emailAddr char(40),
 						   REFERENCES pizza_users(emailAddr),
 						   FOREIGN KEY (topping)
 						   REFERENCES topping(tName)) ENGINE = INNODB;
+
+CREATE VIEW userInfo AS 
+	select firstName, lastName, emailAddr, address
+	FROM pizza_users;
