@@ -50,7 +50,7 @@ require 'header.php';
                
                 $stmt2->execute();
                 $result2 = $stmt2->setFetchMode(PDO::FETCH_ASSOC);
-                if(mysqli_num_rows($result)>1){
+                if(mysqli_num_rows($result2)>1){
                 echo "<h3>Your Order History</h3>";
                 echo "<table style='border: solid 1px black;'>";
                 echo "<tr><th>Order #</th><th>Date Ordered</th><th>Total Price</th><th>Pizza #</th><th>Toppings on Pizza</th></tr>";

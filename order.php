@@ -37,14 +37,14 @@ if (isset($_POST['send'])) {
     try {
         require_once ('pdo_config.php');
         $date = date("Y-m-d");
-        $sql = "insert into orders values(:unique_id, :date, :orderTotal, :userEmail)";
+        $sql = "insert into orders values(:unique_id,:date,:userEmail)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':unique_id', $unique_id);
         $stmt->bindValue(':date', $date);
-        $stmt->bindValue(':orderTotal', $orderTotal);
+        //$stmt->bindValue(':orderTotal', $orderTotal);
         $stmt->bindValue(':userEmail', $userEmail);
         $stmt->execute();
-
+        echo('hello world');
         $pizzaNumber = 1;
         for($i = 0; $i < count($toCart); $i++) {
             if ($i == 0){  //if first index of array i.e: bbq pizza
