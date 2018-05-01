@@ -1,5 +1,5 @@
 use pizza;
-source drop_all.sql
+
 
 CREATE TABLE pizza_users (firstName char(20),
 				   lastName char(20),
@@ -36,6 +36,7 @@ CREATE TABLE orders (orderId int,
 					 emailAddr char(40),
 					 totalPrice int(6),
 					 isComplete boolean NOT NULL DEFAULT 0,
+                     order_timestamp timestamp default current_timestamp,
 					 PRIMARY KEY (orderId),
 					 FOREIGN KEY (emailAddr)
 					 REFERENCES pizza_users(emailAddr)) ENGINE = INNODB;
