@@ -16,7 +16,7 @@ require 'header.php';
 		}
 		
 
-		header('refresh:5; pizza_menu.php');
+		header('refresh:2; pizza_menu.php');
 		exit();
 	
 		?>
