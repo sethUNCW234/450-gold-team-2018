@@ -33,7 +33,8 @@ CREATE TABLE topping (tName char(20),
 
 CREATE TABLE orders (orderId int,
 					 dateReceived date,
-					 emailAddr char(40),
+					 emailAddr char(40)
+					 totalPrice int(6),
 					 PRIMARY KEY (orderId),
 					 FOREIGN KEY (emailAddr)
 					 REFERENCES pizza_users(emailAddr)) ENGINE = INNODB;
