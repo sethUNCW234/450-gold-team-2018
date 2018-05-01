@@ -33,7 +33,7 @@ CREATE TABLE topping (tName char(20),
 
 CREATE TABLE orders (orderId int,
 					 dateReceived date,
-					 emailAddr char(40)
+					 emailAddr char(40),
 					 totalPrice int(6),
 					 isComplete boolean NOT NULL DEFAULT 0,
 					 PRIMARY KEY (orderId),
