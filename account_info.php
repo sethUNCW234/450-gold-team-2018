@@ -33,7 +33,7 @@ require 'header.php';
             try {
                 require_once ('pdo_config.php');
                 $sql = "SELECT * FROM userinfo WHERE emailAddr = :email"; // make use of userInfo view
-                $sql2 = "SELECT orderID, dateReceived, price, pizzaNumber, topping from orders natural join pizzaHistory where emailAddr = :email";
+                $sql2 = "SELECT orderID, dateReceived, totalPrice, pizzaNumber, GROUP_CONCAT(topping) from orders natural join pizzaHistory where emailAddr = :email GROUP BY orderID, pizzaNumber";
                 $stmt = $conn->prepare($sql); 
                 $stmt2 = $conn->prepare($sql2);
                 $stmt->bindValue(':email', $email);
@@ -50,7 +50,7 @@ require 'header.php';
                
                 $stmt2->execute();
                 $result2 = $stmt2->setFetchMode(PDO::FETCH_ASSOC);
-                if(mysqli_num_rows($result2)>1){
+                if (true) { //(mysqli_num_rows($result2)>=1){
                 echo "<h3>Your Order History</h3>";
                 echo "<table style='border: solid 1px black;'>";
                 echo "<tr><th>Order #</th><th>Date Ordered</th><th>Total Price</th><th>Pizza #</th><th>Toppings on Pizza</th></tr>";
@@ -62,7 +62,7 @@ require 'header.php';
             else{
                 echo("<h2>Our records show you have not placed an order with us </h2>");
             }
-            } 
+            }
             catch(PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }
