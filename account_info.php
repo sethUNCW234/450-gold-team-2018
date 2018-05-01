@@ -32,7 +32,7 @@ require 'header.php';
             $email = $_SESSION["email"];
             try {
                 require_once ('pdo_config.php');
-                $sql = "SELECT * FROM userInfo WHERE emailAddr = :email"; // make use of userInfo view
+                $sql = "SELECT * FROM userinfo WHERE emailAddr = :email"; // make use of userInfo view
                 $sql2 = "SELECT orderID, dateReceived, price, pizzaNumber, topping from orders natural join pizzaHistory where emailAddr = :email";
                 $stmt = $conn->prepare($sql); 
                 $stmt2 = $conn->prepare($sql2);
