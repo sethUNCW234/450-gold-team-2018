@@ -17,6 +17,9 @@ if (isset($_POST['send'])) {
     $missing = array();
     $toCart = array();
 
+
+
+
     $BBQChicken = (int) $_POST['0'];
     $toCart[] = $BBQChicken;
     $Deluxe = (int)  $_POST['1'];
@@ -29,7 +32,7 @@ if (isset($_POST['send'])) {
     $toCart[] = $Vegetarian;
 
     $unique_id = substr(strval(time()), -5); // generate unique 5 digit order ID
-    $orderTotal = array_sum($toCart) * 14.99;
+    $orderTotal = array_sum($toCart) * $price;
     if (isset($_SESSION["email"])){
         $userEmail = $_SESSION["email"];
     }
@@ -37,15 +40,22 @@ if (isset($_POST['send'])) {
     try {
         require_once ('pdo_config.php');
         $date = date("Y-m-d");
+        $sqlprice = "select price from pizza where pizzaName ='Deluxe'";
         $sql = "insert into orders values(:unique_id,:date,:userEmail,:totalPrice)";
+        $priceStmt = $conn->prepare($sqlprice);
+        $priceStmt->execute();
+        $resultprice =$priceStmt->fetch();
+        $price =  (float) $resultprice["price"];
+        echo($price);
+
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':unique_id', $unique_id);
         $stmt->bindValue(':date', $date);
         $stmt->bindValue(':totalPrice', $orderTotal);
         $stmt->bindValue(':userEmail', $userEmail);
         $stmt->execute();
-        echo('hello world');
         $pizzaNumber = 1;
+
         for($i = 0; $i < count($toCart); $i++) {
             if ($i == 0){  //if first index of array i.e: bbq pizza
                 if ($toCart[$i] == 0) {
@@ -209,7 +219,7 @@ if (isset($_POST['send'])) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 
-                echo "<input type='number' id='".$row['pizzaName']."-".$row['price']."' style='width:150px; display:inline' class='form-control' min='0' max='100' placeholder='0' name='".$new."' value='".
+                echo "<input type='number' id='".$row['pizzaName']."-".$row['price']."' style='width:150px; display:inline' class='form-control' min='0' max='100' placeholder='0' name='pizza".$new."' value='".
                 htmlentities($row['pizzaName'])."'> ".$row['pizzaName']." ($".$row['price'].")";
                 echo "</br>";
                 $new++;
