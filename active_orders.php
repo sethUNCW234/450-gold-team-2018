@@ -27,38 +27,37 @@ require 'header.php';
                 echo "</tr>" . "\n";
             } 
         } 
-
+    if (isset($_SESSION["firstName"], $_SESSION["email"])) {
+            $email = $_SESSION["email"];
         try {
             require_once ('pdo_config.php');
-            $sql = "SELECT orderID, dateReceived, price from orderDetails natural join orders";
+            $sql = "SELECT orderID, dateReceived, totalPrice FROM orders WHERE emailAddr = :email AND isComplete = 0";
             $stmt = $conn->prepare($sql); 
+            $stmt->bindValue(':email', $email);
             $stmt->execute();
 
             // set the resulting array to associative
             //echo(mysql_num_rows($result));
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
 
-            if(mysqli_num_rows($result)>1){
-         echo "<table style='border: solid 1px black;'>";
+            if(true){
+        echo "<table style='border: solid 1px black;'>";
         echo "<tr><th>Order ID</th><th>Date Received</th><th>Price</th></tr>";
                 
             foreach(new TableRows(new RecursiveArrayIterator($stmt->fetchAll())) as $k=>$v) { 
                 echo $v;
             }
             echo("</table>");
-        }
+            }
             else{
-                echo("<h3>No current orders at this time</h3>");
-        
-            
-
-            
-        }
-
+                echo("<h3>You have no current orders at this time,<br>
+                    order now!</h3>");
+            }
         }
         catch (PDOException $e) { 
             echo $e->getMessage();
         }
+    }
     
         echo "</div>";
         

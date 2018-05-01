@@ -33,7 +33,7 @@ if (isset($_POST['send'])) {
 				session_start();
 				$_SESSION["firstName"] = $firstName;
 				$_SESSION["adminEmail"] = $adminEmail;
-				header('Location: active_orders.php'); // redirect to logged_in page
+				header('Location: admin_logged_in.php'); // redirect to logged_in page
 				exit;
 			}
 			else {

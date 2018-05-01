@@ -37,7 +37,7 @@ if (isset($_POST['send'])) {
     try {
         require_once ('pdo_config.php');
         $date = date("Y-m-d");
-        $sql = "insert into orders values(:unique_id,:date,:userEmail,:totalPrice)";
+        $sql = "insert into orders (orderId, dateReceived, emailAddr, totalPrice) values(:unique_id,:date,:userEmail,:totalPrice)";
         $stmt = $conn->prepare($sql);
         $stmt->bindValue(':unique_id', $unique_id);
         $stmt->bindValue(':date', $date);
