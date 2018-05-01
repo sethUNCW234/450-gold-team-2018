@@ -222,7 +222,7 @@ if (isset($_POST['send'])) {
             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
 
-                echo "<input type='number' id='".$row['pizzaName']."-".$row['price']."' style='width:150px; display:inline' class='form-control' min='0' max='100' placeholder='0' name='pizza".$new."' value='".
+                echo "<input type='number' id='".$row['pizzaName']."-".$row['price']."' style='width:150px; display:inline' class='form-control' min='0' max='100' placeholder='0' name='".$new."' value='".
                 htmlentities($row['pizzaName'])."'> ".$row['pizzaName']." ($".$row['price'].")";
                 echo "</br>";
                 $new++;
