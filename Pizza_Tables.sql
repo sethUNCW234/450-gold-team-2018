@@ -1,5 +1,6 @@
-use pizza;
-
+use sgf8396;
+source drop_all.sql;
+DROP VIEW userInfo;
 
 CREATE TABLE pizza_users (firstName char(20),
 				   lastName char(20),
@@ -50,6 +51,7 @@ CREATE TABLE orderDetails (orderId int,
 					 		FOREIGN KEY (orderId)
 					 		REFERENCES orders(orderId)) ENGINE = INNODB;
 
+/*
 CREATE TABLE pizzaHistory (emailAddr char(40),
 						   pizzaNumber int,
 						   topping char(30),
@@ -58,6 +60,7 @@ CREATE TABLE pizzaHistory (emailAddr char(40),
 						   REFERENCES pizza_users(emailAddr),
 						   FOREIGN KEY (topping)
 						   REFERENCES topping(tName)) ENGINE = INNODB;
+*/
 
 CREATE VIEW userInfo AS 
 	select firstName, lastName, emailAddr, address
