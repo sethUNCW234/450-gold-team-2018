@@ -107,7 +107,7 @@ if (isset($_POST['send'])) {
         for($i = 0; $i < count($toCart); $i++) {
             
             if ($i == 0){  //if first index of array i.e: bbq pizza
-                echo($toCart[$i]."this is tocart 0");
+               // echo($toCart[$i]."this is tocart 0");
                 if ($toCart[$i] == 0) {
                     //do nothing
                 }
@@ -305,6 +305,7 @@ if (isset($_POST['send'])) {
                 <img  id="10" class='topping' src="./pics-450/jalpepper.png" style="display:none">
 
                 <input type="hidden" name="hiddenTotal" id="hiddenTotal" value="0.00">
+                <br>
                 <br>
                 <br>
                 <br>

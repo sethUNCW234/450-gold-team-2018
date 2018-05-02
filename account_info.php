@@ -8,7 +8,7 @@ require 'header.php';
 
         <?php
         echo "<div>";
-        echo "<table style='border: solid 1px black;'>";
+        echo "<table class='table'>";
         echo "<tr><th>First Name</th><th>Last Name</th><th>Email</th><th>Address</th></tr>";
 
         class TableRows extends RecursiveIteratorIterator { 
@@ -33,7 +33,7 @@ require 'header.php';
             try {
                 require_once ('pdo_config.php');
                 $sql = "SELECT * FROM userinfo WHERE emailAddr = :email"; // make use of userInfo view
-                $sql2 = "SELECT orderId,order_timestamp,totalPrice,pizzaNumber, GROUP_CONCAT(topping) from orderdetails natural join orders where emailAddr = :email  group by orderID,pizzaNumber  order by order_timestamp desc";
+                $sql2 = "SELECT orderId,order_timestamp,totalPrice,pizzaNumber, GROUP_CONCAT(topping),isComplete from orderdetails natural join orders where emailAddr = :email  group by orderID,pizzaNumber  order by order_timestamp desc";
                 $stmt = $conn->prepare($sql); 
                 $stmt2 = $conn->prepare($sql2);
                 $stmt->bindValue(':email', $email);
@@ -52,8 +52,8 @@ require 'header.php';
                 $result2 = $stmt2->setFetchMode(PDO::FETCH_ASSOC);
                 if (true) { //(mysqli_num_rows($result2)>=1){
                 echo "<h3>Your Order History</h3>";
-                echo "<table style='border: solid 1px black;'>";
-                echo "<tr><th>Order #</th><th>Date Ordered</th><th>Total Price</th><th>Pizza #</th><th>Toppings on Pizza</th></tr>";
+                echo "<table class='table'>";
+                echo "<tr><th>Order #</th><th>Date Ordered</th><th>Total Price</th><th>Pizza #</th><th>Toppings on Pizza</th><th>completed</th></tr>";
                 foreach(new TableRows(new RecursiveArrayIterator($stmt2->fetchAll())) as $k=>$v) {
                 echo $v;
                 }
