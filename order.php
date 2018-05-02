@@ -16,12 +16,21 @@ require 'header.php';
 if (isset($_POST['send'])) {
     $missing = array();
     $toCart = array();
-
+    $BBQCart = array();
+    $DeluxeCart =array();
+    $HawaiianCart=array();
+    $MeatLoversCart=array();
+    $VegetarianCart=array();
 
 
 
     $BBQChicken = (int) $_POST['0'];
+
+  
+
+
     $toCart[] = $BBQChicken;
+
     $Deluxe = (int)  $_POST['1'];
     $toCart[] = $Deluxe;
     $Hawaiian = (int) $_POST['2'];
@@ -31,8 +40,13 @@ if (isset($_POST['send'])) {
     $Vegetarian = (int) $_POST['4'];
     $toCart[] = $Vegetarian;
 
+
+
+
+
+
     $unique_id = substr(strval(time()), -5); // generate unique 5 digit order ID
-    $orderTotal = array_sum($toCart) * $price;
+    
     if (isset($_SESSION["email"])){
         $userEmail = $_SESSION["email"];
     }
@@ -42,13 +56,15 @@ if (isset($_POST['send'])) {
         $date = date("Y-m-d");
 
         $sql = "insert into orders (orderId, dateReceived, emailAddr, totalPrice) values(:unique_id,:date,:userEmail,:totalPrice)";
+        
+       // $sql = "insert into orders values(:unique_id,:date,:userEmail,:totalPrice)";
+        
         $sqlprice = "select price from pizza where pizzaName ='Deluxe'";
-        $sql = "insert into orders values(:unique_id,:date,:userEmail,:totalPrice)";
         $priceStmt = $conn->prepare($sqlprice);
         $priceStmt->execute();
         $resultprice =$priceStmt->fetch();
         $price =  (float) $resultprice["price"];
-        echo($price);
+        $orderTotal = array_sum($toCart) * $price;
 
 
         $stmt = $conn->prepare($sql);
@@ -59,8 +75,39 @@ if (isset($_POST['send'])) {
         $stmt->execute();
         $pizzaNumber = 1;
 
+        
+
+        if(isset($_POST['customPcheck'])){
+            if( isset($_POST['topping']) && is_array($_POST['topping']) ) {
+                $orderTotal+=10.00;
+                foreach($_POST['topping'] as $topping) {
+                    
+                $toppingArray=explode('-',$topping);
+                    //print_r($toppingArray);
+                    $sql99 = "insert into orderDetails values(:unique_id, :pizzaNumber,'".$toppingArray[1]."')";
+                        $stmt99 = $conn->prepare($sql99);
+                        $orderTotal += (float)$toppingArray[0]; 
+                       $stmt99->bindValue(':unique_id', $unique_id);
+                       $stmt99->bindValue(':pizzaNumber', $pizzaNumber);
+                       $stmt99->execute();
+                        }
+
+        
+                    }
+                    echo($orderTotal);
+                $sql98 = "UPDATE orders set totalPrice= :totaPrice where orderId= :unique_id";
+                $stmt98 = $conn->prepare($sql98);
+                $stmt98->bindParam(':totalPrice', $orderTotal);
+                $stmt98->bindParam(':unique_id', $unique_id,PDO::PARAM_INT);
+                $stmt98->execute(array(":totaPrice" => $orderTotal, ":unique_id" => $unique_id));
+                $pizzaNumber++;
+                }
+                
+                
         for($i = 0; $i < count($toCart); $i++) {
+            
             if ($i == 0){  //if first index of array i.e: bbq pizza
+                echo($toCart[$i]."this is tocart 0");
                 if ($toCart[$i] == 0) {
                     //do nothing
                 }
@@ -191,7 +238,12 @@ if (isset($_POST['send'])) {
                 }
             }
         }
-    }
+
+        }
+    
+
+
+
     catch (PDOException $e) {
         echo $e->getMessage();
     }
@@ -231,7 +283,7 @@ if (isset($_POST['send'])) {
 
         <h3>Custom Pizza:</h3>
        <div class="form-check" style="display:inline;">
-      <input type="checkbox" id="custPcheck">
+      <input type="checkbox" name="customPcheck" id="custPcheck">
       <label class="form-check-label" for="customPizza">
         create your own custom pizza ($10.00 + Toppings)
       </label>
@@ -251,7 +303,8 @@ if (isset($_POST['send'])) {
                 <img  id="8" class='topping' src="./pics-450/mushroom.png" style="display:none">
                 <img  id="9" class='topping' src="./pics-450/onion.png" style="display:none">
                 <img  id="10" class='topping' src="./pics-450/jalpepper.png" style="display:none">
-                <br>
+
+                <input type="hidden" name="hiddenTotal" id="hiddenTotal" value="0.00">
                 <br>
                 <br>
                 <br>
@@ -276,8 +329,8 @@ if (isset($_POST['send'])) {
         <?php 
             $stmt2->execute();
             while($row2 = $stmt2->fetch(PDO::FETCH_ASSOC)) {
-                echo "<div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' disabled='true' id=".$row2['tName']." value='".
-                htmlentities($row2['price'])."'> ".$row2['tName']." ($".$row2['price'].") </label></div>";
+                echo "<div class='form-check'><label class='form-check-label'><input type='checkbox' class='form-check-input' name='topping[]' disabled='true' id=".$row2['tName']." value='".
+                htmlentities($row2['price']).'-'.$row2['tName']."'> ".$row2['tName']." ($".$row2['price'].") </label></div>";
                 echo "<br>";
             } 
         }
@@ -374,6 +427,7 @@ if (isset($_POST['send'])) {
                 var currentPrice=calculatePrice()
                 $('#total').text("$"+ currentPrice);
                 $("#total2").text("$"+ currentPrice);
+                $('#hiddenTotal').value(currentPrice);
             });
             
 

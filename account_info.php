@@ -33,7 +33,7 @@ require 'header.php';
             try {
                 require_once ('pdo_config.php');
                 $sql = "SELECT * FROM userinfo WHERE emailAddr = :email"; // make use of userInfo view
-                $sql2 = "SELECT orderID, dateReceived, totalPrice, pizzaNumber, GROUP_CONCAT(topping) from orders natural join pizzaHistory where emailAddr = :email GROUP BY orderID, pizzaNumber";
+                $sql2 = "SELECT orderId,order_timestamp,totalPrice,pizzaNumber, GROUP_CONCAT(topping) from orderdetails natural join orders where emailAddr = :email  group by orderID,pizzaNumber  order by order_timestamp desc";
                 $stmt = $conn->prepare($sql); 
                 $stmt2 = $conn->prepare($sql2);
                 $stmt->bindValue(':email', $email);
