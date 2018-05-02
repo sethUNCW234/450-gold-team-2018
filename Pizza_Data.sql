@@ -44,9 +44,9 @@ insert into topping values('Asiago Cheese', 01.50,'Vegetarian');
 insert into topping values('Mushroom', 01.50,'Vegetarian');
 insert into topping values('Onion', 01.50,'Vegetarian');
 
-insert into orders (orderId,dateReceived,emailAddr,totalPrice,isComplete) values(11111, '2018-04-16', 'JakePeralta@gmail.com',15,0);
-insert into orders (orderId,dateReceived,emailAddr,totalPrice,isComplete) values(22222, '2018-04-15', 'Amy_Santiago@gmail.com',20,0);
-insert into orders (orderId,dateReceived,emailAddr,totalPrice,isComplete) values(33333, '2018-04-14', 'DetectiveRD@gmail.com',36,0);
+insert into orders (orderId,dateReceived,emailAddr,totalPrice,isComplete) values(11111, '2018-04-16', 'JakePeralta@gmail.com',15.99,0);
+insert into orders (orderId,dateReceived,emailAddr,totalPrice,isComplete) values(22222, '2018-04-15', 'Amy_Santiago@gmail.com',20.00,0);
+insert into orders (orderId,dateReceived,emailAddr,totalPrice,isComplete) values(33333, '2018-04-14', 'DetectiveRD@gmail.com',36.99,0);
 
 insert into orderDetails values(11111, 1, 'Pepperoni');
 insert into orderDetails values (22222, 1, 'Pepperoni');
