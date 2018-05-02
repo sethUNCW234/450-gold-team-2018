@@ -1,12 +1,12 @@
 <?php
 
-/*Sam Falcon*/ //database password (might be different from your UNCW one)
+# Sam Falcon - database password (might be different from your UNCW one)
 
-		define(DBCONNSTRING,'mysql:host=127.0.0.1;dbname=pizza'); /* your email without the @: just the letters and numbers */
+		define(DBCONNSTRING,'mysql:host=127.0.0.1;dbname=pizza'); # your email without the @: just the letters and numbers 
 
 		define(DBUSER, 'root');
 
-		define(DBPASS,'root'); //database password (might be different from your UNCW one)
+		define(DBPASS,'root'); #database password (might be different from your UNCW one)
 
 
 		try {
